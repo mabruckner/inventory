@@ -1,0 +1,5 @@
+-- Your SQL goes here
+CREATE TABLE items (
+id INTEGER NOT NULL PRIMARY KEY,
+name VARCHAR NOT NULL
+)

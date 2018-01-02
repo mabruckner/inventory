@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<ul>
+{% for item in items %}
+<li>{{ item.id }} : {{ item.name }} <a href="/delete/{{ item.id }}">X</a></li>
+{% endfor %}
+</ul>
+<form action="add" method="post">
+<input type="text" name="name"></input>
+<button type="submit">Add Item</button>
+</form>
+</body>
+</html>
