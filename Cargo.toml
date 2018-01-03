@@ -1,5 +1,5 @@
 [package]
-name = "fridge-inventory"
+name = "inventory"
 version = "0.1.0"
 authors = ["Mitchell Bruckner <mbruckner807@gmail.com>"]
 
