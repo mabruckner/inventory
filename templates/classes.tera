@@ -1,0 +1,41 @@
+{% extends "base" %}
+{% block body%}
+<table class="table">
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Unit</th>
+<th>Edit</th>
+<th>Delete</th>
+</thead>
+<tbody>
+{% for class in classes %}
+<tr>
+<td>{{class.id}}</td>
+<td>{{class.name}}</td>
+<td>{{class.unit}}</td>
+<td><a href="/classes/modify/{{class.id}}" class="button is-small">
+<span class="icon is-small">
+<i class="fa fa-edit"></i>
+</span>
+</a></td>
+<td><a href="/classes/delete/{{class.id}}" class="button is-small is-danger is-outlined">
+
+<span class="icon is-small">
+<i class="fa fa-trash"></i>
+</span>
+</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<form action="classes/add" method="post">
+{% include "class_form" %}
+<div class="field">
+<div class="control">
+<button type="submit" class="button">Add Class</button>
+</div>
+</div>
+</form>
+{% endblock body %}

@@ -1,0 +1,12 @@
+{% extends "base" %}
+{% block body%}
+{% set default = class %}
+<form method="post">
+{% include "class_form" %}
+<div class="field">
+<div class="control">
+<button type="submit" class="button">Update</button>
+</div>
+</div>
+</form>
+{% endblock body %}

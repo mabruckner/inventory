@@ -1,0 +1,51 @@
+{% extends "base" %}
+{% block body%}
+<table class="table">
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Quantity</th>
+</thead>
+<tbody>
+{% for b in batches %}
+<tr>
+<td>{{b.batch.id}}</td>
+<td>{{b.class.name}}</td>
+<td>{{b.batch.quantity}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<form action="/add" method="post">
+<div class="field">
+<label class="label">Type</label>
+<div class="control">
+<div class="select">
+<select name="class">
+{%for class in classes %}
+<option value="{{ class.id }}">{{ class.name }}</option>
+{% endfor %}
+<select>
+</div>
+</div>
+</div>
+<div class="field">
+<label class="label">Quantity</label>
+<div class="control">
+<input class="input" type="text" name="quantity" value="1"></input>
+</div>
+</div>
+<div class="field">
+<label class="label">Additional Data</label>
+<div class="control">
+<input class="input" type="text" name="data" value=""></input>
+</div>
+</div>
+<div class="field">
+<div class="control">
+<button type="submit" class="button">Add Item</button>
+</div>
+</div>
+</form>
+{% endblock body %}

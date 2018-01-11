@@ -1,0 +1,24 @@
+<div class="field">
+<label class="label">Class Name</label>
+<div class="control">
+<input class="input" type="text" name="name" value="{{default.name}}"></input>
+</div>
+</div>
+<div class="field">
+<label class="label">Measurement Type</label>
+<div class="control">
+<div class="select">
+<select name="unit">
+{% for unit in units %}
+<option value="{{unit}}" {% if unit==default.unit %}selected{% endif %}>{{unit}}</option>
+{% endfor %}
+</select>
+</div>
+</div>
+</div>
+<div class="field">
+<label class="label">Supplemental Data Schema</label>
+<div class="control">
+<textarea class="textarea" name="schema" value="{{default.schema}}"></textarea>
+</div>
+</div>
