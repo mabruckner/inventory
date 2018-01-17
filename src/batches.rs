@@ -6,6 +6,7 @@ use rocket_contrib::Template;
 use schema;
 use rocket::request::{self, FromRequest, Form};
 use rocket::response::Redirect;
+use rocket_contrib::Json;
 
 use classes::{Class, Batch};
 
@@ -54,5 +55,10 @@ pub fn get_batches(conn: Conn) -> Template {
         classes: classlist
     };
     Template::render("batches", &context)
+}
+
+#[get("/")]
+pub fn api_get(conn: Conn) -> Json<Vec<Batch>> {
+    Json(batches::table.load::<Batch>(&*conn).expect("UNABLE TO COMPLETE REQUEST").iter().cloned().collect::<Vec<Batch>>())
 }
 

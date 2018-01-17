@@ -14,6 +14,22 @@ Generate the databse
 
 `diesel migration run`
 
+install cargo web
+
+`cargo install cargo-web`
+
+Add the emscripten compile target
+
+`rustup target add asmjs-unknown-emscripten`
+
+Compile the client
+
+```
+cd client
+cargo web build
+cd ..
+```
+
 And run;
 
 `cargo run`

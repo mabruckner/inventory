@@ -1,0 +1,9 @@
+[package]
+name = "inventory-client"
+version = "0.1.0"
+authors = ["Mitchell Bruckner <mbruckner807@gmail.com>"]
+
+[dependencies]
+yew = "0.2.0"
+serde = "*"
+serde_derive = "*"

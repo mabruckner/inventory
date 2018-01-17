@@ -27,11 +27,12 @@ use std::env;
 use r2d2_diesel::ConnectionManager;
 use rocket::http::{Status};
 use rocket::request::{self, FromRequest, Form};
-use rocket::response::Redirect;
+use rocket::response::{Redirect, NamedFile};
 use rocket::{Request, State, Outcome};
 use rocket_contrib::Template;
 use serde::Serialize;
 
+use std::path::Path;
 
 #[derive(Queryable, Debug, Serialize, Clone)]
 struct Batch {
@@ -90,6 +91,12 @@ fn delete(conn: Conn, id: i32) -> Redirect {
     Redirect::to("/")
 }
 
+#[get("/static/<file>")]
+fn client(file: String) -> Option<NamedFile> {
+    let path = Path::new("client/target/asmjs-unknown-emscripten/debug/").join(file);
+    NamedFile::open(path).ok()
+}
+
 #[derive(FromForm, Debug)]
 struct AddForm {
     name: String
@@ -98,8 +105,11 @@ fn main() {
     rocket::ignite()
         .attach(Template::fairing())
         .manage(init_pool())
-        .mount("/", routes![batches::get_batches, delete, batches::add_batch])
+        .mount("/", routes![index,client])
+        .mount("/batches", routes![batches::get_batches, delete, batches::add_batch])
         .mount("/classes", routes![classes::class_list, classes::modify_class_page, classes::delete_class, classes::add_class, classes::modify_class])
+        .mount("/api/classes", routes![classes::api_get])
+        .mount("/api/batches", routes![batches::api_get])
         .launch();
     println!("Hello, world!");
 }

@@ -5,6 +5,7 @@ use schema::{classes, batches};
 
 use rocket::request::{self, FromRequest, Form};
 use rocket::response::Redirect;
+use rocket_contrib::Json;
 
 use rocket_contrib::Template;
 #[derive(Identifiable, Queryable, Debug, Serialize, Clone)]
@@ -41,6 +42,11 @@ struct ClassMod {
 
 fn get_units() -> Vec<String> {
     vec!["Count".into(), "Mass".into(), "Volume".into()]
+}
+
+#[get("/")]
+pub fn api_get(conn: Conn) -> Json<Vec<Class>> {
+    Json(classes::table.load::<Class>(&*conn).expect("UNABLE TO COMPLETE REQUEST").iter().cloned().collect::<Vec<Class>>())
 }
 
 #[get("/")]
